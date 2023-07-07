@@ -1,0 +1,25 @@
+{
+  "name": "helpinghand",
+  "version": "1.0.0",
+  "description": "A multi-purpose Discord bot using discord.js!",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CheeseLad/helpinghand.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CheeseLad/helpinghand/issues"
+  },
+  "homepage": "https://github.com/CheeseLad/helpinghand#readme",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1",
+    "nodemon": "^2.0.22"
+  }
+}
