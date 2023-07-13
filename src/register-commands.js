@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { REST, Routes} = require('discord.js');
+const { REST, Routes, ApplicationCommandOptionType} = require('discord.js');
 
 const commands = [
   {
@@ -10,6 +10,43 @@ const commands = [
     name: 'ping',
     description: 'Pong!',
   },
+  {
+    name: "add",
+    description: "Adds two numbers",
+    options: [
+      {
+        name: "num1",
+        description: "First number",
+        type: ApplicationCommandOptionType.Number,
+        choices: [
+          {
+            name: "one",
+            value: 1
+          },
+          {
+            name: "two",
+            value: 2
+          },
+          {
+            name: "three",
+            value: 3
+          },
+        ],
+        required: true
+      },
+      {
+        name: "num2",
+        description: "Second number",
+        type: ApplicationCommandOptionType.Number,
+        required: true
+      }
+    ]
+  },
+  {
+    name: "embed",
+    description: "Sends an embed message",
+  },
+
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
