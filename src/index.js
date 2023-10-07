@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, IntentsBitField, EmbedBuilder, ClientUser } = require('discord.js');
+const { Client, IntentsBitField, EmbedBuilder, ClientUser, ActivityType, Guild } = require('discord.js');
 
 const client = new Client({
   intents: [
@@ -12,6 +12,12 @@ const client = new Client({
 
 client.on('ready', (c) => {
   console.log(`${c.user.tag}` + " is ready to help!")
+  targetGuild = client.guilds.cache.get('1117906015757799494')
+
+  client.user.setActivity({
+    name: `${targetGuild.memberCount} Members`,
+    type: ActivityType.Watching,
+  });
 });
 
 client.on('messageCreate', (message) => {
@@ -78,5 +84,33 @@ client.on("messageCreate", (message) => {
   }
 });
 
+client.on("interactionCreate", async (interaction) => {
+  try {
+    if (interaction.isButton()) return;
+
+    const role = interaction.guild.roles.cache.get(interaction.customId);
+    await interaction.deferReply({ ephemeral: true });
+    if (!role) {
+      interaction.editReply({
+        content: "I couldn't find that role",
+      })
+      return;
+    }
+  
+    const hasRole = interaction.member.roles.cache.has(role.id);
+  
+    if (hasRole) {
+      await interaction.member.roles.remove(role);
+      await interaction.editReply(`The role ${role} has been removed`);
+      return;
+    }
+  
+    await interaction.member.roles.add(role);
+    await interaction.editReply(`The role ${role} has been added`);
+
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 client.login(process.env.TOKEN);
