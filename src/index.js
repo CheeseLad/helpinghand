@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, IntentsBitField, EmbedBuilder } = require('discord.js');
+const { Client, IntentsBitField, EmbedBuilder, ClientUser } = require('discord.js');
 
 const client = new Client({
   intents: [
